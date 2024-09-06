@@ -1,7 +1,6 @@
 **Rules Implemented**
 
-Rental Database needs to keep track of three main entities namely User, Car and Reservation.
-
+- Rental Database needs to keep track of three main entities namely User, Car and Reservation.
 - Car can be rented from a rental location with a specific address of each rental location.
 - Rental location keeps track of contact phone number, contact email and rental location address with street name, state and zip code.
 - Rental location can have multiple number of cars for rental.
@@ -31,3 +30,35 @@ Rental Database needs to keep track of three main entities namely User, Car and 
 - Users information consists of name as first name, middle name and last name, email address, physical address, date of birth and contact number.
 - Registered user will be provided with login id and password.
 - Users can save their credit/ debit card details for future payment.
+- Partial payment can be made at the time of reservation and the rest must be paid during car return on the actual end date.
+- You can pay through saved debit/credit card/cash.
+- We can add accessories as part of the reservation.
+- Accessories can be ‘Car Seat’ and ‘GPS’.
+- Additional driver can be added as part of the reservation.
+- For each driver there will be additional charges.
+
+**Functional Dependencies**
+- Rental_Location_ID is the primary key
+  - Rental_Location_ID —> {Phone, Email, Street_Name, State, Zip_Code}
+- Type of the car defines the rental price of the car per day
+  - Car_Type —> Price_Per_Day
+- Type of the insurance defines the insurance coverage
+  - Insurance_Type —> {Bodily_Coverage, Medical_Coverage, Collision_Coverage}
+- Insurance Type and Car Type defines the Insurance price per day
+  - {Car_Type, Insurance_Type} —> {Insurance_Price}
+- User details
+  - {License_No} —> {FName, Mname, Lname, Email, Address, Phone, DOB, User_Type}
+- Login_ID defines the rest of the attributes in the entity
+  - {Login_ID} —> {Password, Year_Of_Membership, License_No}
+- Login_ID and Card_No in Card_Details defines complete card information
+  - {Login_ID, Card_No} —> {Name_On_Card, Expiry_Date, CVV, Billing_Address}
+- Reservation_ID drives all the other attributes in Reservation relation
+  - Reservation_ID —> {Start_Date, End_Date, Meter_Start, Meter_End, Rental_Amount, Insurance_Amount, Actual_End_Date, Status, License_No, VIN, Promo_Code, Additional_Amount, Tot_Amount, Insurance_Type, Penalty_Amount,       Drop_Location_ID}
+- Payment_ID is the primary key of Payment relation
+  - Payment_ID —> {Amount_Paid, Card_No, Expiry_Date, Name_On_Card, CVV, Billing_Address, Reservation_ID, Login_ID, Saved_Card_No, Paid_By_Cash}
+- Promo_Code defines other attributes in Offer_Details relation
+  - Promo_Code —> {Description, Promo_Type, Is_One_Time, Percentage, Discounted_Amount, Status}
+- Additional_Drivers relation
+  - {Reservation_ID,Name} —> DOB
+- In Accessories relation, Accessory_ID drives the type and amount of the accessory
+  - Accessory_ID —> {Type, Amount}
