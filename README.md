@@ -62,3 +62,5 @@
   - {Reservation_ID,Name} —> DOB
 - In Accessories relation, Accessory_ID drives the type and amount of the accessory
   - Accessory_ID —> {Type, Amount}
+
+![ER](https://github.com/user-attachments/assets/2dc99b1a-2c31-4e7d-adc0-218ccc8920b0)
